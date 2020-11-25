@@ -1,7 +1,3 @@
-<h1 align="center">
-    <br>
-        Chat
-    <br>
-</h1>
+# Chat
 
-Typescript, React, Firebase chat
+chat-client
