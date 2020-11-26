@@ -95,3 +95,4 @@ export default connect(
   }),
   messagesActions,
 )(Dialogs);
+

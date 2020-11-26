@@ -8,8 +8,6 @@ import { UploadFiles } from "components";
 
 import "./ChatInput.scss";
 
-const { TextArea } = Input;
-
 const ChatInput = props => {
   const {
     emojiPickerVisible,
@@ -58,7 +56,7 @@ const ChatInput = props => {
               />
             </div>
           ) : (
-            <TextArea
+            <Input
               onChange={e => setValue(e.target.value)}
               onKeyUp={handleSendMessage}
               size="large"

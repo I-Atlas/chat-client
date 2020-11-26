@@ -8,7 +8,7 @@ const Status = ({ currentDialogId, user, dialogs }) => {
   }
 
   const currentDialogObj = dialogs.filter(
-    dialog => dialog._id === currentDialogId
+    (dialog) => dialog._id === currentDialogId
   )[0];
 
   let partner = {};
@@ -19,11 +19,20 @@ const Status = ({ currentDialogId, user, dialogs }) => {
     partner = currentDialogObj.author;
   }
 
-  return <StatusBase online={partner.isOnline} fullname={partner.fullname} />;
+  return (
+    <StatusBase
+      online={
+        currentDialogObj.partner._id === currentDialogObj.author._id
+          ? true
+          : partner.isOnline
+      }
+      fullname={partner.fullname}
+    />
+  );
 };
 
 export default connect(({ dialogs, user }) => ({
   dialogs: dialogs.items,
   currentDialogId: dialogs.currentDialogId,
-  user: user.data
+  user: user.data,
 }))(Status);

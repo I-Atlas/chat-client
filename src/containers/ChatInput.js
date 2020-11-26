@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { filesApi } from 'utils/api';
 import socket from 'core/socket';
+import aes from "crypto-js/aes"
 
 import { ChatInput as ChatInputBase } from 'components';
 
@@ -94,8 +95,17 @@ const ChatInput = props => {
     if (isRecording) {
       mediaRecorder.stop();
     } else if (value || attachments.length) {
+      const encryptedText = aes.encrypt(value, "helloworldiliya").toString()
+      const decryptedText = aes.decrypt(encryptedText, "helloworldiliya").toString()
+      console.log("Encrypted", encryptedText);
+      console.log("Decrypted", decryptedText);
+      // var encrypted = CryptoJS.AES.encrypt("Message", "Secret Passphrase");
+      // var decrypted = CryptoJS.AES.decrypt(encrypted, "Secret Passphrase");
+      // encrypt messeges here
+      // const textValue = `${value}asdasdasdasdasdsadasd`
       fetchSendMessage({
         text: value,
+        // text: encryptedText,
         dialogId: currentDialogId,
         attachments: attachments.map(file => file.uid),
       });

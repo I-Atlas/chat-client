@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { Popover, Button, Icon } from 'antd';
 import { Emoji } from 'emoji-mart';
 import reactStringReplace from 'react-string-replace';
-
+import aes from "crypto-js/aes"
 import { convertCurrentTime, isAudio } from 'utils/helpers';
 
 import waveSvg from 'assets/img/wave.svg';
@@ -96,6 +96,9 @@ const Message = ({
   onRemoveMessage,
   setPreviewImage,
 }) => {
+  // decrypt here
+  const decryptedText = aes.decrypt(text, "helloworldiliya").toString()
+  // console.log(decryptedText);
   const renderAttachment = item => {
     if (item.ext !== 'webm') {
       return (
@@ -145,7 +148,7 @@ const Message = ({
               {text && (
                 <p className="message__text">
                   {reactStringReplace(text, /:(.+?):/g, (match, i) => (
-                    <Emoji key={i} emoji={match} set="apple" size={16} />
+                    <Emoji key={i} emoji={match} set="apple" size={20} />
                   ))}
                 </p>
               )}
